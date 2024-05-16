@@ -1,7 +1,6 @@
-const http = require("http");
 const fs = require("fs");
 
-const server = http.createServer((req, res) => {
+const requestHandler = (req, res) => {
   const url = req.url;
   const method = req.method;
 
@@ -10,7 +9,7 @@ const server = http.createServer((req, res) => {
     res.write("<html>");
     res.write("<head><title>Enter Message</title></head>");
     res.write(
-      '<body><form action="/message" method="POST"><input type="text" name="message" placeholder="Enter the message..."/><button type="submit">Submit<button></form></body>'
+      '<body><form action="/message" method="POST"><input type="text" name="message" placeholder="Enter the message..."/><button type="submit">Submit</button></form></body>'
     );
     res.write("</html>");
     return res.end();
@@ -39,6 +38,14 @@ const server = http.createServer((req, res) => {
   res.write("<body><h1>Us bro us</h1></body>");
   res.write("</html>");
   res.end();
-});
+};
 
-server.listen(3000);
+// module.exports = requestHandler;
+
+// module.exports = {
+//   handler: requestHandler,
+//   someText: "Some hard coded text",
+// };
+
+exports.handler = requestHandler;
+exports.someText = "Hello";
